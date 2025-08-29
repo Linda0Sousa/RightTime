@@ -25,7 +25,7 @@ class Session(models.Model):
     date = models.DateField()
     start_time = models.TimeField(null=False, blank=False)
     end_time = models.TimeField(null=False, blank=False)
-    number_of_people = models.PositiveIntegerField()
+    number_of_people = models.PositiveIntegerField(default= 1)
     status = models.CharField(
         max_length=20,
         choices=[("confirmed", "Confirmed"), ("cancelled", "Cancelled"), ("pendind", "pending")],
