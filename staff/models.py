@@ -31,6 +31,7 @@ class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
     number_of_people = models.PositiveIntegerField()
     status = models.ForeignKey(Status, on_delete=models.CASCADE, related_name="status")
+    
 class Activity(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
