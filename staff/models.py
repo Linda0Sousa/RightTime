@@ -15,9 +15,9 @@ class TimeTable(models.Model):
     
 class User(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=500)
-    phone_number = models.PositiveIntegerField()
+    phone_number = models.PositiveIntegerField(unique=True)
     role = models.ForeignKey(Role, on_delete=models.CASCADE, related_name="users")
     
 class Location(models.Model):
@@ -26,6 +26,7 @@ class Location(models.Model):
     timeTable = models.ForeignKey(TimeTable, on_delete=models.CASCADE, related_name="locations")
     capacity = models.PositiveIntegerField() 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="locations")
+    description = models.CharField(max_length=1000)
     
 class Reservation(models.Model):
     timeTable = models.ForeignKey(TimeTable, on_delete=models.CASCADE, related_name="reservations")
