@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Página Login</title>
+  </head>
+  <body>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }} 
+    <button type="submit">submit</button>
+</form>
+    </p>
+  </body>
+</html>

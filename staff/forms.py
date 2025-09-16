@@ -7,6 +7,20 @@ class LocationForm(forms.ModelForm):
         model = Location
         fields = ["name", "description", "capacity", "timeTable"]
         
+    def save(self, user, commit=True):
+        #creates the object but does not saves it
+        instance = super().save(commit=False)
+        
+        #get the user
+        user = User.objects.get(id = user.id)
+        instance.user = user
+        
+        if commit:
+            instance.save()
+        return instance
+        
+        
+        
 class LoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)

@@ -25,9 +25,25 @@ def login(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = form.login()
+            request.session["user_id"] = user.id
             return HttpResponse(f"Login feito para: {user.email}")
         else:
             return HttpResponse("Login inválido")
 
     form = LoginForm()
     return render(request, "staff/login.html", {"form": form})
+
+def create_location(request):
+    #gets the user creating the location
+    user = request.session["user_id"]
+    
+    if request.method == "POST":
+        form = LocationForm(request.Post, user)
+        if form.is_valid():
+            user = form.login()
+            return HttpResponse("feito")
+        else:
+            return HttpResponse("nao feito")
+        
+    form = LocationForm()
+    return render(request, "staff/location_form.html", {"form": form})
