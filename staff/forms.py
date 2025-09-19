@@ -1,11 +1,12 @@
 from django import forms
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
+from django.forms import inlineformset_factory
 
 class LocationForm(forms.ModelForm):
     class Meta:
         model = Location
-        fields = ["name", "description", "capacity", "timeTable"]
+        fields = ["name", "description", "capacity"]
         
     def save(self, user, commit=True):
         #creates the object but does not saves it
@@ -19,7 +20,10 @@ class LocationForm(forms.ModelForm):
             instance.save()
         return instance
         
-        
+class TimeTableForm(forms.ModelForm):
+    class Meta:
+        model = TimeTable
+        fields = ["date", "start_time", "end_time"]
         
 class LoginForm(forms.Form):
     email = forms.EmailField()

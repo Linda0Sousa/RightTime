@@ -7,18 +7,18 @@ class Role(models.Model):
     
 class Status(models.Model):
     status = models.CharField(max_length=15, null=False, blank=False)
-    
-class TimeTable(models.Model):
-    date = models.DateField(null=False, blank=False)
-    start_time = models.TimeField(null=False, blank=False)
-    end_time = models.TimeField(null=False, blank=False)
-    
 class User(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=500)
     phone_number = models.PositiveIntegerField(unique=True)
     role = models.ForeignKey(Role, on_delete=models.CASCADE, related_name="users")
+    
+class TimeTable(models.Model):
+    date = models.DateField(null=False, blank=False)
+    start_time = models.TimeField(null=False, blank=False)
+    end_time = models.TimeField(null=False, blank=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="timeTable")
     
 class Location(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
@@ -27,6 +27,15 @@ class Location(models.Model):
     capacity = models.PositiveIntegerField() 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="locations")
     description = models.CharField(max_length=1000)
+    
+class Weekdays(models.Model):
+    name = models.CharField(max_length=15)
+    
+class WeeklySchedule(models.Model):
+    day = models.ForeignKey(Weekdays, on_delete=models.CASCADE, related_name="schedules")
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    location = models.ForeignKey("Location", on_delete=models.CASCADE, related_name="weekly_schedules")
     
 class Reservation(models.Model):
     timeTable = models.ForeignKey(TimeTable, on_delete=models.CASCADE, related_name="reservations")
