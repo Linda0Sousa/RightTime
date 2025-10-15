@@ -47,3 +47,15 @@ def create_location(request):
         
     form = LocationForm()
     return render(request, "staff/location_form.html", {"form": form})
+
+def create_activity(request):
+    if request.method == "POST":
+        form = ActivityForm(request.Post, user)
+        if form.is_valid():
+            user = form.login()
+            return HttpResponse("feito")
+        else:
+            return HttpResponse("nao feito")
+        
+    form = ActivityForm()
+    return render(request, "staff/create_activity.html", {"form": form})
