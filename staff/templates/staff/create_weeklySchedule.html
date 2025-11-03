@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Horario semanal</title>
+  </head>
+  <body>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }} 
+    <button type="submit">Criar horario</button>
+</form>
+    </p>
+  </body>
+</html>

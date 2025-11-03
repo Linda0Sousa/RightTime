@@ -93,3 +93,12 @@ class ActivityForm(forms.ModelForm):
             self.save_m2m()
 
         return activity
+    
+class WeeklyScheduleForm(forms.ModelForm):
+    
+    class Meta:
+        model = WeeklySchedule
+        fields = ["weekday", "start_time", "end_time"]
+        
+    def save(self):
+        self.save()

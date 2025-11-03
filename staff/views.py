@@ -38,9 +38,8 @@ def create_location(request):
     user = request.session["user_id"]
     
     if request.method == "POST":
-        form = LocationForm(request.Post, user)
+        form = LocationForm(request.POST, user)
         if form.is_valid():
-            user = form.login()
             return HttpResponse("feito")
         else:
             return HttpResponse("nao feito")
@@ -50,7 +49,7 @@ def create_location(request):
 
 def create_activity(request):
     if request.method == "POST":
-        form = ActivityForm(request.Post, user)
+        form = ActivityForm(request.POST, user)
         if form.is_valid():
             user = form.login()
             return HttpResponse("feito")
@@ -59,3 +58,14 @@ def create_activity(request):
         
     form = ActivityForm()
     return render(request, "staff/create_activity.html", {"form": form})
+
+def create_weeklySchedule(request):
+    if request.method == "POST":
+        form = WeeklyScheduleForm(request.POST)
+        if form.is_valid():
+            return HttpResponse("semana feita")
+        else:
+            return HttpResponse("algo de errado aconteceu")
+        
+    form = WeeklyScheduleForm()
+    return render(request, "staff/create_weeklySchedule.html", {"form":form})
